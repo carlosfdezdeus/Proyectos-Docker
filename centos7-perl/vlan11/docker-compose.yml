@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  centos-perl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  # Agregamos este comando para mantener el contenedor en ejecución
+    volumes:
+      - ./perl:/usr/src/app
+    networks:
+      bridge.net:
+        ipv4_address: 172.19.0.2
+      macvlan.net:
+        ipv4_address: 192.168.8.5
+
+  alpine:
+    image: "alpine:latest"
+    command: tail -f /dev/null  # Agregamos este comando para mantener el contenedor en ejecución
+    networks:
+      bridge.net:
+        ipv4_address: 172.19.0.3
+
+networks:
+  bridge.net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24
+  macvlan.net:
+    driver: macvlan
+    driver_opts:
+      parent: eth1.11 #eth1.11 | enx44.11
+    ipam:
+      config:
+        - subnet: 192.168.8.4/24
+          ip_range: 192.168.8.4/30  # Limito a dos direcciones ip
