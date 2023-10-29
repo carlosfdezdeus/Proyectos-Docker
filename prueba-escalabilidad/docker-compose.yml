@@ -1,0 +1,57 @@
+services:
+    reverseproxy:
+        container_name: proxy
+        build: 
+            context: ./nginx/
+            dockerfile: Dockerfile
+        ports:
+            - 80:80
+            - 443:443
+        restart: always
+        volumes:
+            - ./nginx/config:/etc/nginx
+        networks:
+            - crm.network
+
+    alpine:
+        container_name: alpine
+        depends_on:
+            - reverseproxy
+        build: 
+            context: ./Alpine/WebService/
+            dockerfile: Dockerfile 
+        restart: always
+        privileged: true
+        volumes:
+            - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+            - ./Alpine/WebService/certs/alpine-crm/:/etc/ssl/certs/docker-crm.turyelectro.com
+            - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+            - ./Alpine/WebService/apache2/virtualhosts/alpine-crm:/etc/apache2-virtualhosts
+        networks:
+            - crm.network
+
+#    alpine-replicas:
+        #container_name: alpine-replicas
+#        depends_on:
+#            - reverseproxy
+#        build: 
+#            context: ./Alpine/WebService/
+#            dockerfile: Dockerfile 
+#        restart: always
+#        privileged: true
+#        deploy:
+#            replicas: 70
+#        volumes:
+#            - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+#            - ./Alpine/WebService/certs/alpine-crm/:/etc/ssl/certs/docker-crm.turyelectro.com
+#            - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+#            - ./Alpine/WebService/apache2/virtualhosts/alpine-crm:/etc/apache2-virtualhosts
+#        networks:
+#            - crm.network
+
+networks:
+  crm.network:
+    driver: bridge # Al tener un IP configurada de esta forma ya se exponen todos los puertos
+    ipam:
+      config:
+        - subnet: 172.10.0.0/24

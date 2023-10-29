@@ -1,0 +1,110 @@
+services:
+  alpine-1:
+    container_name: alpine-1
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-1:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-1/:/etc/apache2-virtualhosts
+    
+  alpine-2:
+    container_name: alpine-2
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-2:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-2/:/etc/apache2-virtualhosts
+
+  alpine-3:
+    container_name: alpine-3
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-3:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-3/:/etc/apache2-virtualhosts
+
+  alpine-4:
+    container_name: alpine-4
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-4:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-4/:/etc/apache2-virtualhosts
+
+  alpine-5:
+    container_name: alpine-5
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-5:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-5/:/etc/apache2-virtualhosts
+
+  alpine-6:
+    container_name: alpine-6
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-6:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-6/:/etc/apache2-virtualhosts
+
+  alpine-7:
+    container_name: alpine-7
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-7:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-7/:/etc/apache2-virtualhosts
+
+  alpine-8:
+    container_name: alpine-8
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-8:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-8/:/etc/apache2-virtualhosts
+
+  alpine-9:
+    container_name: alpine-9
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-9:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-9/:/etc/apache2-virtualhosts
+
+  alpine-10:
+    container_name: alpine-10
+    extends:
+      file: docker-compose.yml
+      service: alpine
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./Alpine/WebService/certs/alpine-crm-10:/etc/ssl/certs/docker-crm.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm-10/:/etc/apache2-virtualhosts
