@@ -1,0 +1,90 @@
+services:
+    reverseproxy:
+        container_name: proxy
+        build: 
+            context: ./nginx/
+            dockerfile: Dockerfile
+        ports:
+            - 80:80
+            - 443:443
+        restart: always
+        networks:
+            alpine-crm.network:
+                ipv4_address: 172.10.0.10
+            rocky-crm.network:
+                ipv4_address: 172.20.0.10
+            alma-crm.network:
+                ipv4_address: 172.30.0.10
+    alpine:
+        container_name: apache-alpine
+        depends_on:
+            - reverseproxy
+        build: 
+            context: ./Alpine/WebService/
+            dockerfile: Dockerfile 
+        restart: always
+        privileged: true
+        volumes:
+            - ./Alpine/WebService/crm:/var/www/localhost/htdocs/crm
+            #- ./crm/live/docker-crm.turyelectro.com:/etc/ssl/certs/docker-crm.turyelectro.com
+            - ./Alpine/WebService/certs:/etc/ssl/certs/docker-crm.turyelectro.com
+            - ./Alpine/WebService/apache2:/etc/apache2
+        networks:
+            alpine-crm.network:
+                ipv4_address: 172.10.0.20
+
+    rocky:
+        container_name: rocky
+        depends_on:
+            - reverseproxy
+        build: 
+            context: ./Rocky/WebService/
+            dockerfile: Dockerfile
+        restart: always
+        privileged: true
+        volumes:
+            - ./Rocky/WebService/crm:/var/www/html/crm
+            - ./Rocky/WebService/certs/docker-crm.turyelectro.com:/etc/ssl/certs/docker-crm.turyelectro.com
+            - ./Rocky/WebService/certs/private:/etc/pki/tls/private
+            - ./Rocky/WebService/httpd/conf:/etc/httpd/conf
+            - ./Rocky/WebService/httpd/conf.d:/etc/httpd/conf.d
+            - ./Rocky/WebService/httpd/conf.modules.d:/etc/httpd/conf.modules.d
+        networks:
+            rocky-crm.network:
+                ipv4_address: 172.20.0.20    
+
+    alma:
+        container_name: alma
+        depends_on:
+            - reverseproxy
+        build: 
+            context: ./Alma/WebService/
+            dockerfile: Dockerfile
+        privileged: true
+        volumes:
+            - ./Alma/WebService/crm:/var/www/html/crm
+            - ./Alma/WebService/certs/docker-crm.turyelectro.com:/etc/ssl/certs/docker-crm.turyelectro.com
+            - ./Alma/WebService/certs/private:/etc/pki/tls/private
+            - ./Alma/WebService/httpd/conf:/etc/httpd/conf
+            - ./Alma/WebService/httpd/conf.d:/etc/httpd/conf.d
+            - ./Alma/WebService/httpd/conf.modules.d:/etc/httpd/conf.modules.d
+        networks:
+            alma-crm.network:
+                ipv4_address: 172.30.0.20
+
+networks:
+  alpine-crm.network:
+    driver: bridge # Al tener un IP configurada de esta forma ya se exponen todos los puertos
+    ipam:
+      config:
+        - subnet: 172.10.0.0/24
+  rocky-crm.network:
+    driver: bridge # Al tener un IP configurada de esta forma ya se exponen todos los puertos
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+  alma-crm.network:
+    driver: bridge # Al tener un IP configurada de esta forma ya se exponen todos los puertos
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
