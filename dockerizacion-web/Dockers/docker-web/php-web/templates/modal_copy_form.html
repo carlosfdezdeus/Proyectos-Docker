@@ -1,0 +1,14 @@
+<script id="modal_copy_racks" type="text/x-jsrender">
+    <input type="hidden" id="shelf2launch" name="shelf2launch" value="{{:id_shelf}}">
+    <div id="rack_{{>#data}}" class="col-6 panel_rack">
+        <h4 class="rack_header text-center">
+            <input type="button" value="Rack {{>#data}}" class="btn btn-default btn_rack" rack="{{>#data}}">
+        </h4>
+        <div id="panel_rack_{{>#data}}" class="text-center">
+        </div>
+    </div>
+</script>
+
+<script id="modal_copy_shelves" type="text/x-jsrender">
+            <input type="button" value="Bandeja {{>shelf}}" class="btn btn-default btn_shelf" id_shelf="{{:id_shelf}}">
+</script>

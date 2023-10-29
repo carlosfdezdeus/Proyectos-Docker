@@ -1,0 +1,16 @@
+<script id="rack_template" type="text/x-jsrender">
+    {{for racks }}
+        <div id="rack_{{>#data}}" class="col-md-6 rack">
+            <h4 class="rack_header text-center">
+                {^{>#parent.parent.data.name}} - Rack {{>#data}}
+                <br>
+                <input type="button" value="Responder preguntas Rack {{>#data}} por defecto" rack="{{>#data}}" class="btn btn-info align-self-center default_answer_all_button">
+            </h4>
+            <div id="panel_rack_{{>#data}}" class="rack_panel"></div>
+        </div>
+    {{else}}
+		<div class="alert alert-danger">
+            <strong>Error:</strong> No se han encontrado los racks.
+		</div>
+    {{/for}}
+</script>

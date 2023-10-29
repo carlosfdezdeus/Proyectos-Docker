@@ -1,0 +1,24 @@
+<div class="modal fade" id="ModalMsgBandeja" tabindex="-1" role="dialog" aria-labelledby="MsgBandeja" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">MENSAJES PARA LA BANDEJA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      <div id="ultimo_msg_bandeja"></div> 
+      <table>
+      <div id="msg_bd_bandeja"></div>  
+      </table>      
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" id="btn_btn_mostrar_msg_bandeja" class="btn btn-primary">Mensajes anteriores</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

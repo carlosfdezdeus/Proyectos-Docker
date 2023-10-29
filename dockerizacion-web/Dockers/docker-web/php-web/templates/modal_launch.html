@@ -1,0 +1,28 @@
+<!-- Modal Launch -->
+<div class="modal fade" id="MenuModalLaunch" tabindex="-1" role="dialog" aria-labelledby="Lanzar" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content" style="width:600px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo">Campos obligatorios para lanzar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <table>
+             		<div id="current_invoice"></div>
+             		<div id="remaining_on_invoice"></div>
+             		<div id="invoice_alert"></div>
+             	</table>
+             	<br />
+                <form id="modal_launch_needed_fields">
+                </form>
+            </div><!-- /.modal-body -->
+            <div class="modal-footer">
+                <span id="lanzar_en_bucle" style="display: none;">Lanzar en bucle: <input type="number" name="loops" id="loops" class="shelf_data" value="1" maxlength="4"></span>
+                <button type="button" class="btn btn-primary" id="btn-launch">Lanzar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn-close">Cerrar</button>
+            </div>
+        </div> <!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->

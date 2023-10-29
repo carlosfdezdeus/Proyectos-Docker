@@ -1,0 +1,72 @@
+<div class="modal fade" id="MenuModalTicket" tabindex="-1" role="dialog" aria-labelledby="Ticket" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><b>GENERAR TICKET</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">        
+        <div id="datos_ticket">      
+        <div id="entorno_ticket"></div>
+        <div id="bandeja_ticket"></div>
+        <div id="modelo_ticket"></div>
+        <div id="logistica_ticket"></div>
+        <div id="usuario_ticket"></div>
+        <!-- div id="lanzadas_ticket"></div -->
+       </div>
+       
+             
+        <div id="datos_ocultos_ticket" style="display: none">      
+        <div id="entorno_ticket_oculto"></div>
+        <div id="bandeja_ticket_oculto"></div>
+        <div id="id_bandeja_ticket_oculto"></div>
+        <div id="modelo_ticket_oculto"></div>
+        <div id="logistica_ticket_oculto"></div>
+        <div id="usuario_ticket_oculto"></div>
+        <div id="lanzadas_ticket_oculto"></div>
+        
+       </div>
+       
+       </br>
+       
+       <div class="botones_ticket">
+                <div class="browser-default" id="botones_incidencia"></div>
+       </div>
+       
+        </br>
+        
+         <div class="col-sm-9">
+               <h4 class="box1"><div id="incidencia_escogida"></div></h4>
+         </div>
+         
+          
+         <div class="botones_ticket">
+                <div id="afectacion"  style="display: none">                
+                 </br>                 
+                 <button type="button" class="btn btn_afectacion btn-primary" id="btn_afecta_bandeja" value = "Afecta Bandeja">AFECTA BANDEJA</button></br>              
+                 <button type="button" class="btn btn_afectacion btn-primary" id="btn_afecta_rack" value = "Afecta Rack">AFECTA RACK</button></br>              
+                 <button type="button" class="btn btn_afectacion btn-primary" id="btn_afecta_entorno" value = "Afecta Entorno">AFECTA ENTORNO</button></br>             
+                 <button type="button" class="btn btn_afectacion btn-primary" id="btn_afecta_maqueta" value = "Afecta Maqueta">AFECTA MAQUETA</button></br>
+                 </br>                
+                </div>
+         </div>
+         
+         
+          <div class="col-sm-9">
+                <h4 class="box2"><div id="afectacion_escogida"></div></h4>
+         </div>
+         
+       
+      
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" id="btn_enviar_ticket" class="btn btn-primary" style="display: none">Enviar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

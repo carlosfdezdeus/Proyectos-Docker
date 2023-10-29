@@ -1,0 +1,48 @@
+<?php
+
+//Selector de entorno
+require('entorno.php');
+
+//Base de datos
+switch ($entorno) {
+    case 'Produccion':
+        // Logs
+        define('DEBUG_FILES_PATH', "/var/log/validator-web/");
+        // WS
+        define('WS_SERVER', "new-validator.turyelectro.com");
+        define('WS_SERVER_PORT', 9300);
+        define('WS_TICKET_PORT', 9339);
+        // MySQL
+        define('MySQL_SERVER', "validator.turyelectro.com");
+        define('MySQL_USER', "root");
+        define('MySQL_PASSWORD', "validator00");
+        define('MySQL_DB', "validator");
+        // STB
+        define('STB_SERVER_XMLRPC_TIMEOUT_COM', 30); // segundos
+        define('STB_SERVER_XMLRPC_TIMEOUT_CHANGING', 180); // segundos
+        define('STB_SERVER_XMLRPC_PORT', 38400);
+        break;
+
+    case 'Desarrollo':
+        // Logs
+        define('DEBUG_FILES_PATH', "/var/log/validator-web/");
+        // WS
+        define('WS_SERVER', "test-validator.turyelectro.com");
+        define('WS_SERVER_PORT', 9001);
+        define('WS_TICKET_PORT', 9313);
+        // MySQL
+        #define('MySQL_SERVER', "test-validator.turyelectro.com");
+        #define('MySQL_USER', "validator-web");
+        #define('MySQL_PASSWORD', "Validator.00");
+        define('MySQL_SERVER', "192.168.30.247");
+        define('MySQL_USER', "logger");
+        define('MySQL_PASSWORD', "logger00");
+        define('MySQL_DB', "validator");
+        define('MySQL_DB_W', "warehouse");
+        // STB
+        define('STB_SERVER_XMLRPC_TIMEOUT_COM', 30); // segundos
+        define('STB_SERVER_XMLRPC_TIMEOUT_CHANGING', 180); // segundos
+        define('STB_SERVER_XMLRPC_PORT', 38400);
+        break;
+}
+?>

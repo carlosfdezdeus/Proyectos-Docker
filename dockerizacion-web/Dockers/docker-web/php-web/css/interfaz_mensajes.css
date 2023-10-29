@@ -1,0 +1,39 @@
+
+
+body {
+    height: 100px;
+    border: none;
+    box-sizing: border-box;  
+  
+}
+
+#label_msg {
+    margin-left: 50px;
+}
+
+table {	
+ width: 600px;
+ margin-left: 50px;
+ border: none !important;
+ text-align: left;
+}
+
+td {
+width: 80%;
+border: none;	
+text-align: left !important;
+}
+
+th, td {
+padding: 5px; 
+}
+
+
+
+#boton_enviar_msg {
+	text-align: center !important;
+	margin-left: 200px;
+	width: 400px;
+	
+}
+

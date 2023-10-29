@@ -1,0 +1,14 @@
+<script id="modal_launch_form" type="text/x-jsrender">
+    <form id="launch_form">
+        <input type="hidden" id="shelf2launch" name="shelf2launch" value="{{:id_shelf}}">
+        <div class="form-row">
+            <label for="test_in_hand" class="col-sm-3 col-form-label text-center"><b>Test in Hand:</b></label>
+            <div class="col-sm-9">
+                <div class="browser-default" id="test_in_hand"></div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-row" id="model_fields">
+        </div>
+    </form>
+</script>

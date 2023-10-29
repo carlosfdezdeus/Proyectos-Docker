@@ -1,0 +1,21 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+
+SERVIDOR='new-validator.turyelectro.com';
+
+echo "Iniciando servidores..."
+
+# SAT2
+for i in {9287..9294} ;
+do
+    php ws_server.php $SERVIDOR $i &
+done
+for i in {9249} ;
+do
+   php ws_server.php $SERVIDOR $i &
+done
+for i in {9256..9262} ;
+do
+    php ws_server.php $SERVIDOR $i &
+done
+

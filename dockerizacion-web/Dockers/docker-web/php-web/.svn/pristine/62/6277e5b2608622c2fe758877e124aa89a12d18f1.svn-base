@@ -1,0 +1,50 @@
+.flotante_izquierda {
+    position: fixed;
+	bottom:2px;
+	left:5px;
+}
+.flotante_derecha {
+	padding:10px;
+	background:#99bfe6;
+	font-size:20px;
+	cursor:pointer;
+	position: fixed;
+	bottom:2px;
+	right:10px;
+}
+.contenido {
+	margin-top: -10px;
+}
+.pie_pagina{
+    height: 20px;
+}
+.activado {
+    background-color: #ccfdcc !important;
+}
+.desactivado {
+    background-color: #ff4e59 !important;
+}
+td:nth-child(1) {
+    width: 80px;
+    text-align: center;
+}
+th:nth-child(1) {
+    text-align: center;
+}
+th{
+    text-align: center;
+}
+td{
+	text-align: center;
+	vertical-align: middle !important;
+}
+.lanzador_puertos{
+	background-color: #20c997;
+	color: #101010;
+
+}
+.informacion_equipos{
+	width: 99%;
+	margin-left: 10px;
+	margin-top: 20px;
+}

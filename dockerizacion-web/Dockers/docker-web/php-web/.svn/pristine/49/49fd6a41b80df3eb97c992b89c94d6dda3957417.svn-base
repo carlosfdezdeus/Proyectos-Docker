@@ -1,0 +1,148 @@
+/*
+    Created on : 02-dic-2013, 12:17:58
+    Author     : Oscar Zapata
+*/
+
+.loading {
+    background-color: #ffffff;
+    background-image: url("/img/loading.gif");
+    background-size: 25px 25px;
+    background-position:right center;
+    background-repeat: no-repeat;
+}
+
+body {
+    height: 100px;
+}
+
+label {
+    padding-right: 10px;
+}
+
+.rack {
+    padding: 0;
+}
+
+.rack_header {
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.rack_panel {
+    height: auto;
+}
+
+.card {
+    min-height: 190px;
+}
+
+.card-header {
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.card-body .info {
+    padding-left: 15px;
+    padding-right: 16px;
+}
+
+.shelf_number_container {
+    padding-top: 0 !important;
+    padding-bottom: 10 !important;
+}
+
+[id^="relaunch_button-"] {
+    margin-left: 15px;
+}
+
+.relaunch_button {
+    width: 100px;
+}
+
+.log {
+    height: 120px;
+    margin-right: 15px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+#dialog-message {
+    height: auto !important;
+}
+
+#MenuModalCopy #invoice_button-modal, #MenuModalCopy #model_button-modal, #MenuModalCopy #all_button-modal {
+    margin-bottom: 10px;
+}
+
+#MenuModalCopy .modal-body .btn {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.panel_rack {
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-top: 10px;
+}
+
+.btn_rack {
+    font-weight: bold;
+}
+
+label.error {
+    float: none;
+    color: red;
+    padding-left: .5em;
+    display: block;
+}
+
+input.input_response {
+    width: 80%;
+    display: inline-block;
+}
+
+.btn.response {
+    margin: 2px;
+}
+
+.btn.test_in_hand_response  {
+    margin: 2px;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.default_answer_all_button {
+    display: none;
+}
+
+.form-check-label {
+    margin-left: 6px;
+}
+
+#loops {
+    width: 70px;
+    text-align: center;
+}
+
+.popover{
+    max-width: none;
+}
+
+body, .sticky-footer-wrapper {
+    min-height: 90vh;
+}
+
+.flex-fill {
+    flex: 1 1 auto;
+}

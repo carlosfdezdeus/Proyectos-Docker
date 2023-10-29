@@ -1,0 +1,16 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+
+SERVIDOR='new-validator.turyelectro.com';
+
+echo "Iniciando servidores..."
+
+# STB3
+for i in {9698..9721} ;
+do
+    php ws_server.php $SERVIDOR $i &
+done
+
+
+
+

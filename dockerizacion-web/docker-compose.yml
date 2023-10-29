@@ -1,0 +1,559 @@
+version: '3.9'
+services:
+# *************************************** VALIDATOR WEB ************************************************* #
+  web-php:
+    build: 
+      context: ./Dockers/docker-web/
+      dockerfile: Dockerfile
+    environment:
+      - DOCKER_TIMEZONE=Europe/Madrid
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-web/php-web:/var/www/localhost/htdocs/validator-web
+      - ./Dockers/docker-web/apache2-config:/etc/apache2
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.2
+    ports:
+      - "80:80"
+
+# *************************************** CENTOS7-PERL VLAN 10 ************************************************* #
+  centos-perl-10:
+    build:
+      context: ./Dockers/dockers-centos/vlan10/
+      dockerfile: Dockerfile 
+    command: sh -c "perl router_data.pl admin 63Ykna4R && tail -f /dev/null" #Este comando ejecuta el perl y despues consigue que el docker no muera    
+    volumes:
+      - ./Dockers/dockers-centos/vlan10/perl:/usr/src/app
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.110
+      macvlan10.network:
+        ipv4_address: 192.168.8.2
+
+# *************************************** CENTOS7-PERL VLAN 11 ************************************************* #
+  centos-perl-11:
+    build:
+      context: ./Dockers/dockers-centos/vlan11/
+      dockerfile: Dockerfile
+    command: sh -c "perl router_data.pl admin ggx669Ju && tail -f /dev/null" #Este comando ejecuta el perl y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/dockers-centos/vlan11/perl:/usr/src/app
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.111
+      macvlan11.network:
+        ipv4_address: 192.168.8.5
+
+# ******************************************* WEBSOCKETS ************************************************* #  
+# ENVIRONMENT 14: 24R1 #
+  ws-24r1:
+    build: 
+      context: ./Dockers/docker-websockets/docker-24R1/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_24R1.php && tail -f /dev/null"  #Este comando ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-24R1/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.14
+    ports:
+      - "9313:9313"
+
+    # ENVIRONMENT 5: CPE2 #
+  ws-cpe2:
+    build: 
+      context: ./Dockers/docker-websockets/docker-CPE2/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_CPE2.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-CPE2/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.5
+    ports:
+      - "9249:9249"
+      - "9256:9256"
+      - "9257:9257"
+      - "9258:9258"
+      - "9259:9259"
+      - "9260:9260"
+      - "9261:9261"
+      - "9262:9262"
+      - "9287:9287"
+      - "9288:9288"
+      - "9289:9289"
+      - "9290:9290"
+      - "9291:9291"
+      - "9292:9292"
+      - "9293:9293"
+      - "9294:9294"
+
+  # ENVIRONMENT 1: CPE1 #
+  ws-cpe1:
+    build: 
+      context: ./Dockers/docker-websockets/docker-CPE1/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_CPE1.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-CPE1/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.100
+    ports:
+      - "9001:9001"
+      - "9002:9002"
+      - "9003:9003"
+      - "9004:9004"
+      - "9005:9005"
+      - "9006:9006"
+      - "9007:9007"
+      - "9008:9008"
+      - "9009:9009"
+      - "9010:9010"
+      - "9011:9011"
+      - "9012:9012"
+      - "9013:9013"
+      - "9014:9014"
+      - "9015:9015"
+      - "9016:9016"
+      - "9020:9020"
+      - "9057:9057"
+      - "9058:9058"
+      - "9059:9059"
+      - "9060:9060"
+      - "9061:9061"
+      - "9062:9062"
+      - "9063:9063"
+      - "9064:9064"
+      - "9065:9065"
+      - "9066:9066"
+      - "9067:9067"
+      - "9068:9068"
+      - "9069:9069"
+      - "9070:9070"
+      - "9071:9071"
+      - "9072:9072"
+      - "9101:9101"
+      - "9271:9271"
+      - "9272:9272"
+      - "9273:9273"
+      - "9274:9274"
+      - "9275:9275"
+      - "9276:9276"
+      - "9277:9277"
+      - "9278:9278"
+      - "9279:9279"
+      - "9280:9280"
+      - "9281:9281"
+      - "9282:9282"
+      - "9283:9283"
+      - "9284:9284"
+      - "9285:9285"
+      - "9286:9286"
+
+  # ENVIRONMENT 17: RUBEN #
+  ws-ruben:
+    build: 
+      context: ./Dockers/docker-websockets/docker-RUBEN/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_RUBEN.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-RUBEN/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.17
+    ports:
+      - "9317:9317"
+
+  # ENVIRONMENT 22: JLUIS #
+  ws-jluis:
+    build: 
+      context: ./Dockers/docker-websockets/docker-JLUIS/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_JLUIS.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-JLUIS/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.22
+    ports:
+      - "9341:9341"
+
+  # ENVIRONMENT 18: IRIA #
+  ws-iria:
+    build: 
+      context: ./Dockers/docker-websockets/docker-IRIA/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_IRIA.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-IRIA/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.18
+    ports:
+      - "9318:9318"
+      - "9326:9326"
+
+  # ENVIRONMENT 11: FERNANDO #
+  ws-fernando:
+    build: 
+      context: ./Dockers/docker-websockets/docker-FERNANDO/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_FERNANDO.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-FERNANDO/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.11
+    ports:
+      - "9315:9315"
+
+  # ENVIRONMENT 7: STB1 #
+  ws-stb1:
+    build: 
+      context: ./Dockers/docker-websockets/docker-STB1/
+      dockerfile: Dockerfile
+#    command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_STB1.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-STB1/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.7
+    ports:
+      - "9120:9120"
+      - "9121:9121"
+      - "9122:9122"
+      - "9123:9123"
+      - "9124:9124"
+      - "9125:9125"
+      - "9126:9126"
+      - "9127:9127"
+      - "9128:9128"
+      - "9129:9129"
+      - "9130:9130"
+      - "9131:9131"
+      - "9132:9132"
+      - "9133:9133"
+      - "9134:9134"
+      - "9135:9135"
+      - "9136:9136"
+      - "9153:9153"
+      - "9154:9154"
+      - "9155:9155"
+      - "9156:9156"
+      - "9157:9157"
+      - "9158:9158"
+      - "9159:9159"
+      - "9160:9160"
+      - "9161:9161"
+      - "9162:9162"
+      - "9163:9163"
+      - "9164:9164"
+      - "9165:9165"
+      - "9166:9166"
+      - "9167:9167"
+      - "9168:9168"
+      - "9169:9169"
+      - "9170:9170"
+      - "9171:9171"
+      - "9172:9172"
+      - "9173:9173"
+      - "9174:9174"
+      - "9175:9175"
+      - "9176:9176"
+      - "9230:9230"
+      - "9297:9297"
+      - "9298:9298"
+      - "9299:9299"
+      - "9300:9300"
+      - "9301:9301"
+      - "9302:9302"
+      - "9303:9303"
+      - "9304:9304"
+      - "9305:9305"
+      - "9306:9306"
+      - "9307:9307"
+      - "9308:9308"
+      - "9309:9309"
+      - "9310:9310"
+
+  # ENVIRONMENT 20: STB3 #
+  ws-stb3:
+    build: 
+      context: ./Dockers/docker-websockets/docker-STB3/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_STB3.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-STB3/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.20
+    ports:
+      - "9322:9322"
+      - "9323:9323"
+      - "9324:9324"
+      - "9325:9325"
+
+  # ENVIRONMENT 21 #
+  ws-dev:
+    build: 
+      context: ./Dockers/docker-websockets/docker-DEV/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_DEV.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-DEV/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.21
+    ports:
+      - "9328:9328"
+      - "9338:9338"
+      - "9339:9339"
+      - "9340:9340"
+
+  # ENVIRONMENT 13: TEST-ANDRES #
+  ws-andres:
+    build: 
+      context: ./Dockers/docker-websockets/docker-ANDRES/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_ANDRES.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-ANDRES/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.13
+    ports:
+      - "9181:9181"
+      - "9327:9327"
+      - "9342:9342"
+      - "9343:9343"
+
+  # ENVIRONMENT 13: TEST-BENITO #
+  ws-benito:
+    build: 
+      context: ./Dockers/docker-websockets/docker-BENITO/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_BENITO.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-BENITO/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.12
+    ports:
+      - "9316:9316"
+
+    # ENVIRONMENT 19: SAT2 #
+  ws-sat2:
+    build: 
+      context: ./Dockers/docker-websockets/docker-SAT2/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_SAT2.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-SAT2/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.19
+    ports:
+      - "9319:9319"
+      - "9320:9320"
+      - "9321:9321"
+  
+  # ENVIRONMENT 6: SAT1 # 
+  ws-sat1:
+    build: 
+      context: ./Dockers/docker-websockets/docker-SAT1/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_SAT1.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-SAT1/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.6
+    ports:
+      - "9078:9078"
+      - "9079:9079"
+      - "9080:9080"
+      - "9102:9102"
+      - "9103:9103"
+      - "9104:9104"
+      - "9105:9105"
+      - "9106:9106"
+      - "9107:9107"
+      - "9108:9108"
+      - "9109:9109"
+      - "9137:9137"
+      - "9138:9138"
+      - "9139:9139"
+      - "9140:9140"
+      - "9141:9141"
+      - "9142:9142"
+      - "9143:9143"
+      - "9144:9144"
+      - "9145:9145"
+      - "9146:9146"
+      - "9147:9147"
+      - "9148:9148"
+      - "9149:9149"
+      - "9150:9150"
+      - "9226:9226"
+      - "9227:9227"
+      - "9228:9228"
+      - "9229:9229"
+      - "9234:9234"
+      - "9235:9235"
+      - "9236:9236"
+      - "9237:9237"
+      - "9238:9238"
+      - "9239:9239"
+      - "9240:9240"
+      - "9241:9241"
+      - "9242:9242"
+      - "9243:9243"
+      - "9244:9244"
+      - "9245:9245"
+      - "9246:9246"
+      - "9247:9247"
+      - "9248:9248"
+
+    # ENVIRONMENT 4: XDSL1 #
+  ws-xdsl1: 
+    build: 
+      context: ./Dockers/docker-websockets/docker-XDSL1/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_XDSL1.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-XDSL1/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.4
+    ports:
+      - "9031:9031"
+      - "9032:9032"
+      - "9033:9033"
+      - "9034:9034"
+      - "9035:9035"
+      - "9036:9036"
+      - "9037:9037"
+      - "9038:9038"
+      - "9039:9039"
+      - "9040:9040"
+      - "9041:9041"
+      - "9042:9042"
+      - "9043:9043"
+      - "9044:9044"
+      - "9045:9045"
+      - "9046:9046"
+
+  # ENVIRONMENT 8: TEST1 #
+  ws-test1: 
+    build: 
+      context: ./Dockers/docker-websockets/docker-TEST1/
+      dockerfile: Dockerfile
+    #command: tail -f /dev/null  #Este comando anula el CMD y hace que no se salga del docker
+    command: sh -c "php launch_ws_servers_TEST1.php && tail -f /dev/null"  #Este ejecuta el php y despues consigue que el docker no muera
+    volumes:
+      - ./Dockers/docker-web/validator-logs:/var/log/validator-web
+      - ./Dockers/docker-websockets/docker-TEST1/launch:/websocket
+    networks:
+      bridge.network:
+        ipv4_address: 172.16.0.8
+    ports:
+      - "9182:9182"
+      - "9183:9183"
+      - "9184:9184"
+      - "9185:9185"
+      - "9186:9186"
+      - "9187:9187"
+      - "9188:9188"
+      - "9189:9189"
+      - "9190:9190"
+      - "9191:9191"
+      - "9192:9192"
+      - "9193:9193"
+      - "9194:9194"
+      - "9195:9195"
+      - "9196:9196"
+      - "9197:9197"
+      - "9198:9198"
+      - "9199:9199"
+      - "9200:9200"
+      - "9201:9201"
+      - "9202:9202"
+      - "9203:9203"
+      - "9204:9204"
+      - "9205:9205"
+      - "9206:9206"
+      - "9207:9207"
+      - "9208:9208"
+      - "9209:9209"
+      - "9210:9210"
+      - "9211:9211"
+      - "9212:9212"
+      - "9213:9213"
+      - "9214:9214"
+      - "9215:9215"
+      - "9216:9216"
+      - "9217:9217"
+      - "9218:9218"
+      - "9219:9219"
+      - "9220:9220"
+      - "9221:9221"
+      - "9222:9222"
+      - "9223:9223"
+      - "9224:9224"
+      - "9225:9225"
+
+# *************************************** NETWORKS ********************************************** #
+networks:
+  bridge.network:
+    driver: bridge # Al tener un IP configurada de esta forma ya se exponen todos los puertos
+    ipam:
+      config:
+        - subnet: 172.16.0.0/24
+  macvlan10.network:
+    driver: macvlan
+    driver_opts:
+      parent: eth1.10 #interface.vlan
+    ipam:
+      config:
+        - subnet: 192.168.8.0/24
+          ip_range: 192.168.8.0/30  # Limito a dos direcciones ip
+  macvlan11.network:
+    driver: macvlan
+    driver_opts:
+      parent: eth1.11 #interface.vlan
+    ipam:
+      config:
+        - subnet: 192.168.8.4/24
+          ip_range: 192.168.8.4/30  # Limito a dos direcciones ip

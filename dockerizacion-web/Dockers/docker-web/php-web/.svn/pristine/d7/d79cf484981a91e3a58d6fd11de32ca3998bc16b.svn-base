@@ -1,0 +1,192 @@
+<script id="shelf_template" type="text/x-jsrender">
+    <div id="shelf-{{:shelf}}" class="card" id_shelf="{{:id_shelf}}">
+<!--
+        <h5 class="card-header">
+            Bandeja {{:shelf}}
+        </h5>
+-->
+        <div class="card-body" style="
+                {{if shelf_color}}background-color:{{:shelf_color}};{{/if}}
+                {{if shelf_text_color}}color:{{:shelf_text_color}};{{/if}}
+        ">
+            <div class="row info d-flex align-items-center">
+                <div class="p-2 bd-highlight my-auto">
+                    <b>Modelo:</b>
+                    {{:model_fields.model}}
+                    <a  tabindex="0"
+                        data-container="body"
+                        data-toggle="popover"
+                        data-trigger="focus"
+                        data-placement="bottom"
+                        data-html="true"
+                        target=_blank
+
+                        href="../index_information_equipment.php?model_id={{:model_fields.model_id}}&logistic_id={{:logistic_id}}"
+                        style="text-decoration: none;">
+                        &#9432;
+                    </a>
+{{if model_fields.customer_info}}
+                    <br>
+                    &emsp;({{:model_fields.customer_info OnError=""}})
+{{/if}}
+                    <br>
+                    <span class='ws_port' id_shelf="{{:id_shelf}}"></span>
+{{if current_view && current_view != 'launcher'}}
+    {{if model_fields.serial}}
+                    <b>Serial:</b> {{:model_fields.serial}}
+    {{/if}}
+{{/if}}
+                </div>
+{{if warning && warning.text}}
+                <div class="p-2 bd-highlight ml-auto" style="
+                    {{if warning_color}}background-color:{{:warning_color}};{{/if}}
+                    {{if warning_text_color}}color:{{:warning_text_color}};{{/if}}
+                ">
+                    <h2>
+                        <a  class="warning"
+                            id_shelf="{{:id_shelf}}"
+                            text_color="{{:warning_text_color}}"
+                            tabindex="0"
+                            data-container="body"
+                            data-toggle="popover"
+                            data-trigger="click"
+                            data-placement="bottom"
+                            data-html="true"
+                            title="{{if warning && warning.info_title}}{{:warning.info_title}}{{else}}Info{{/if}}"
+                            data-content='{{if warning && warning.info_text}}{{:warning.info_text}}{{/if}}'
+                            style="text-decoration: none;"
+                        >
+                            <b>{{if warning && warning.text}}{{:warning.text}}{{/if}}</b>
+                        </a>
+                    </h2>
+                </div>
+{{/if}}
+                <div class="p-2 bd-highlight ml-auto" style="
+                    {{if flow_color}}background-color:{{:flow_color}};{{/if}}
+                    {{if flow_text_color}}color:{{:flow_text_color}};{{/if}}
+                ">
+                    <h2>
+                        <a  class="last_launch_info"
+                            id_shelf="{{:id_shelf}}"
+                            text_color="{{:flow_text_color}}"
+                            tabindex="0"
+                            data-container="body"
+                            data-toggle="popover"
+                            data-trigger="focus"
+                            data-placement="bottom"
+                            data-html="true"
+                            title="Informacion sobre &uacute;ltima lanzada"
+                            data-content='{{if last_launch_info && last_launch_info.info}}{{:last_launch_info.info}}{{/if}}'
+                            style="text-decoration: none;"
+                        >
+                            <b>{{if last_launch_info && last_launch_info.flow}}{{:last_launch_info.flow}}{{else}}?{{/if}}</b>
+                        </a>
+                    </h2>
+                </div>
+            </div>
+            <div class="row section-box align-items-center">
+                <div class="col-3 p-4 bd-highlight text-center align-middle shelf_number_container">
+{{if current_view && current_view == 'launcher'}}
+                    <input type="button" value="Lanzar" id_shelf="{{:id_shelf}}" class="btn btn-success launch_button">
+    {{if launch_without_data && launch_without_data == '1'}}
+                    <input type="button" value="Lanzar sin datos" id_shelf="{{:id_shelf}}" class="btn btn-success launch_without_data_button">
+    {{/if}}
+{{else}}
+                    <b><span class="time_from_launch" id_shelf="{{:id_shelf}}">{{:time_from_launch}}</span> LL</b>
+{{/if}}
+                    <h2 class="shelf_number" id_shelf="{{:id_shelf}}" style="{{if shelf_number_color}}color:{{:shelf_number_color}};{{/if}} ">
+                        {{:shelf}}
+                    </h2>
+{{if current_view && current_view == 'launcher'}}
+                    <input type="button" value="Copiar" id_shelf="{{:id_shelf}}" class="btn btn-primary copy_button">
+{{else}}
+                    <b><span class="time_from_last_server_activity_datetime" id_shelf="{{:id_shelf}}">{{:time_from_last_server_activity_datetime}}</span> LA</b>
+{{/if}}
+                </div>
+{{if current_view && current_view == 'msg'}}
+    {{if msg && msg != ''}}
+                    <div class="p-2 col flex-grow-1 bd-highlight msg" id_shelf="{{:id_shelf}}">
+                        {{:msg}}
+                    </div>
+    {{else}}
+                    <div class="col-sm-10 text-center align-middle">
+                        <h1>Error: No se ha podido cargar el mensaje.</h1>
+                        <h4>(Avisar a sistemas)</h4>
+                    </div>
+    {{/if}}
+{{else current_view && current_view == 'log'}}
+                <div id="log-{{:id_shelf}}" class="dragscroll noselect col p-1 flex-grow-1 text-left align-middle log text-dark" id_shelf="{{:id_shelf}}">
+                    {{:log}}
+                </div>
+{{else current_view && current_view == 'launcher'}}
+                <div class="p-2  flex-grow-1 align-middle">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group form-inline row">
+                            <label for="invoice" class="control-label col-2" id="invoice-{{:id_shelf}}-label" >
+                                Albar&aacute;n
+                            </label>
+                            <input type="text" class="invoice shelf_data form-control col-{{if last_launch_info}}6{{else}}9{{/if}}"
+                                id_shelf="{{:id_shelf}}" id="invoice_{{:id_shelf}}" class="invoice" placeholder="sin albar&aacute;n" value="{{:invoice}}">
+    {{if last_launch_info}}
+                            <button type="button" class="btn btn-primary col-3 relaunch_button" id_shelf={{:id_shelf}}>
+                                ReLanzar
+                            </button>
+    {{/if}}
+                        </div>
+                        <div class="form-group form-inline row">
+                            <label for="model" id_shelf="{{:id_shelf}}" class="control-label col-2">
+                                Modelo
+                            </label>
+                            <input  type="text"
+                                    class="model shelf_data form-control col-9"
+                                    id_shelf="{{:id_shelf}}"
+                                    value="{{if model_fields.customer_info}}{{:model_fields.model}} ({{:model_fields.customer_info}}){{else}}{{:model_fields.model}}{{/if}}"
+                                    id="model_{{:id_shelf}}">
+                        </div>
+                    </form>
+                </div>
+{{else current_view && current_view == 'question'}}
+                <div class="p-2 flex-grow-1 col align-self-center">
+                    <form class="form-horizontal" role="form">
+                        {{:msg}}
+                        <br />
+                        <div class="form-group">
+    {{if response_type}}
+        {{if response_type == 'buttons' && responses}}
+            {{props responses}}
+                            <button type="button"
+                                value="{{>key}}"
+                                class="btn btn-primary response"
+                                id_shelf="{{:#parent.parent.data.id_shelf}}"
+                            >{{>key}}</button>
+            {{/props}}
+        {{else response_type == 'select' && responses}}
+                            <select class="browser-default custom-select w-75 select_response" id_shelf="{{:id_shelf}}">
+            {{props responses}}
+                                <option value="{{>prop}}">{{>key}}</option>
+            {{/props}}
+                            </select>
+                            <input type="button" value="Enviar" class="btn btn-primary send_select_response" id_shelf="{{:id_shelf}}">
+        {{else}}
+                            <input type="text" class="form-control input_response" id_shelf="{{:id_shelf}}">
+                            <input type="button" value="Enviar" class="btn btn-primary send_input_response" id_shelf="{{:id_shelf}}">
+        {{/if}}
+    {{/if}}
+                        </div>
+                    </form>
+                </div>
+{{else}}
+                <div class="col-8 flex-grow-1 text-center align-middle">
+                    <h1>Error: No se ha podido cargar la vista.</h1>
+                    <h4>(Avisar a sistemas)</h4>
+                </div>
+{{/if}}
+                </div>
+            </div>
+<!--
+            <div class="card-footer">
+                Card footer
+            </div>
+-->
+    </div>
+</script>

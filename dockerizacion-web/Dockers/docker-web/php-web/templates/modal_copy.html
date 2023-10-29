@@ -1,0 +1,37 @@
+<!-- Modal Copy -->
+<div class="modal fade" id="MenuModalCopy" tabindex="-1" role="dialog" aria-labelledby="Copiar" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo">Campos obligatorios para lanzar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <br>
+            <div class="modal-body">
+                <div class="modal-copy">
+                    <div class="row">
+                        <div class="col-12 align-self-center">
+                            <input type="button" value="Modelo" id="model_button-modal" class="btn btn-default">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <input type="button" value="Albar&aacute;n" id="invoice_button-modal" class="btn btn-default">
+                        </div>
+                        <div class="col-5 align-self-center">
+                            <button type="button" class="btn btn-primary" id="all_button-modal">Todos los Racks</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" id="racks"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" id="btn-copy">Copiar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn-close">Cerrar</button>
+            </div>
+        </div> <!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
