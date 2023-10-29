@@ -1,0 +1,38 @@
+services:
+  reverseproxy:
+    container_name: proxy
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/config:/etc/nginx
+      - ./certbot/atc.turyelectro.com/:/etc/ssl/certs/atc.turyelectro.com
+    networks:
+      - atc.network
+
+  alpine:
+    container_name: alpine
+    depends_on:
+      - reverseproxy
+    build:
+      context: ./Alpine/WebService
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./Alpine/WebService/crm/common:/var/www/localhost/htdocs/crm
+      - ./certbot/atc.turyelectro.com/:/etc/ssl/certs/atc.turyelectro.com
+      - ./Alpine/WebService/apache2/common-config:/etc/apache2/
+      - ./Alpine/WebService/apache2/virtualhosts/alpine-crm:/etc/apache2-virtualhosts
+    networks:
+      - atc.network
+
+networks:
+  atc.network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.100.100.0/24
